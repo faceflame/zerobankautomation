@@ -10,10 +10,10 @@ import java.util.List;
 public class AccountActivityPage extends BasePage{
 
     @FindBy(id = "aa_accountId")
-    public List<WebElement> accountTypes;
+    public WebElement accountTypes;
 
     @FindBy(xpath = "//div[@id='all_transactions_for_account']/table/thead/tr/th")
-    public List<WebElement>transactionColumns;
+    public List<WebElement> transactionsColumn;
 
 
 
