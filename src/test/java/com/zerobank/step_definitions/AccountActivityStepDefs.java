@@ -64,7 +64,7 @@ public class AccountActivityStepDefs {
             Assert.assertEquals(expectedTableHeaders.get(i), accountActivityPage.transactionsColumn.get(i).getText());
 
         }
-        -
+
 
 
     }

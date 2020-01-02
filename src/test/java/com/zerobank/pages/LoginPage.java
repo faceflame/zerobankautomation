@@ -19,6 +19,9 @@ public WebElement signinBut;
 @FindBy(xpath = "//div[@class='alert alert-error']")
 public WebElement errorMessage;
 
+@FindBy(className = "icon-user")
+public WebElement userButton;
+
     public void login(String username, String password){
         usernameBox.sendKeys(username);
         passwordBox.sendKeys(password);

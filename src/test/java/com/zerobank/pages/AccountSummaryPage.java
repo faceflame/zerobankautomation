@@ -15,6 +15,22 @@ public class AccountSummaryPage extends BasePage {
     @FindBy(xpath = "(//div[@class='board-content'])[3]//table/thead/tr/th")
     public List<WebElement>creditAccountsColums;
 
+    @FindBy(xpath = "//a[contains(text(), 'Brokerage')]")
+    public WebElement brokerageLink;
+
+    @FindBy(xpath = "//a[contains(text(), 'Savings')]")
+    public WebElement savingsLink;
+
+    @FindBy(xpath = "//a[contains(text(), 'Checking')]")
+    public WebElement checkingAccountLink;
+
+    @FindBy(xpath = "//a[contains(text(), 'Credit')]")
+    public WebElement creditCardLink;
+
+    @FindBy(xpath = "//a[contains(text(), 'Loan')]")
+    public WebElement LoanLink;
+
+
 
 
     public AccountSummaryPage(){

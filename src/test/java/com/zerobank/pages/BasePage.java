@@ -26,6 +26,8 @@ public class BasePage {
     public WebElement onlineStatementsTab;
 
 
+
+
 public BasePage(){
     PageFactory.initElements(Driver.get(), this);
 }
