@@ -36,10 +36,10 @@ public class FindTransactionsStepDefs {
     @Then("results table should only show transactions dates between {string} to {string}")
     public void results_table_should_only_show_transactions_dates_between_to(String fromDate, String toDate) {
         BrowserUtils.waitFor(2);
-        fromDate= fromDate.replace("-", "");
-        toDate=toDate.replace("-", "");
-        Integer firstDate= Integer.valueOf(fromDate);
-        Integer lastDate= Integer.valueOf(toDate);
+        fromDate = fromDate.replace("-", "");
+        toDate = toDate.replace("-", "");
+        Integer firstDate = Integer.valueOf(fromDate);
+        Integer lastDate = Integer.valueOf(toDate);
 
         AccountActivityPage accountActivityPage = new AccountActivityPage();
         List<String> transactions = BrowserUtils.getListOfString(accountActivityPage.transactionDates);
@@ -50,28 +50,25 @@ public class FindTransactionsStepDefs {
             transactionsFinal.add(transactions.get(i).replace("-", ""));
             actualTransactionDates.add(Integer.valueOf(transactionsFinal.get(i)));
         }
-
-        Assert.assertTrue(actualTransactionDates.get(0)<=lastDate);
-        Assert.assertTrue(actualTransactionDates.get(actualTransactionDates.size()-1)>=0);
-
+        Assert.assertTrue(actualTransactionDates.get(0) <= lastDate);
+        Assert.assertTrue(actualTransactionDates.get(actualTransactionDates.size() - 1) >= 0);
 
         accountActivityPage.dateFrom.clear();
         accountActivityPage.dateTo.clear();
-
     }
 
     @Then("the results should be sorted by most recent date")
     public void the_results_should_be_sorted_by_most_recent_date() {
         AccountActivityPage accountActivityPage = new AccountActivityPage();
         List<String> actualDates = BrowserUtils.getListOfString(accountActivityPage.transactionDates);
-        String value= "";
-        String followingValue="";
+        String value = "";
+        String followingValue = "";
 
-        for (int i = 0; i <actualDates.size()-1 ; i++) {
-            value= actualDates.get(i);
-            followingValue=actualDates.get(i+1);
+        for (int i = 0; i < actualDates.size() - 1; i++) {
+            value = actualDates.get(i);
+            followingValue = actualDates.get(i + 1);
         }
-        Assert.assertTrue(value.compareTo(followingValue)>0);
+        Assert.assertTrue(value.compareTo(followingValue) > 0);
     }
 
     @Then("the results table should only not contain transactions dated {string}")
@@ -80,4 +77,39 @@ public class FindTransactionsStepDefs {
         List<String> actualDates = BrowserUtils.getListOfString(accountActivityPage.transactionDates);
         Assert.assertTrue(!actualDates.contains(string));
     }
+
+    @When("the user enters description {string}")
+    public void the_user_enters_description(String description) {
+        AccountActivityPage accountActivityPage = new AccountActivityPage();
+        BrowserUtils.waitForVisibility(accountActivityPage.dateFrom, 5);
+        accountActivityPage.descriptionBox.sendKeys(description);
+        BrowserUtils.waitFor(1);
+        accountActivityPage.getTransactions("2012-09-02", "2012-09-06");
+        accountActivityPage.descriptionBox.clear();
+        accountActivityPage.dateFrom.clear();
+        accountActivityPage.dateTo.clear();
+    }
+
+    @Then("results table should only show descriptions containing {string}")
+    public void results_table_should_only_show_descriptions_containing(String description) {
+        AccountActivityPage accountActivityPage = new AccountActivityPage();
+
+        List<String> descriptions = BrowserUtils.getListOfString(accountActivityPage.descriptionsColumn);
+
+        System.out.println(descriptions);
+        System.out.println(description);
+
+        for (int i = 0; i <descriptions.size() ; i++) {
+           Assert.assertTrue(descriptions.get(i).startsWith(description));
+        }
+    }
+
+    @Then("results table should not show descriptions containing {string}")
+    public void results_table_should_not_show_descriptions_containing(String string) {
+        AccountActivityPage accountActivityPage = new AccountActivityPage();
+        BrowserUtils.waitForVisibility(accountActivityPage.dateFrom, 5);
+        List<String> descriptions = BrowserUtils.getListOfString(accountActivityPage.descriptionsColumn);
+        Assert.assertTrue(!descriptions.contains(string));
+    }
+
 }

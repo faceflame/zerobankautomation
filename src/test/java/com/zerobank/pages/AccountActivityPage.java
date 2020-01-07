@@ -24,14 +24,23 @@ public class AccountActivityPage extends BasePage {
     @FindBy(id = "aa_toDate")
     public WebElement dateTo;
 
+    @FindBy(id= "aa_description")
+    public WebElement descriptionBox;
+
     @FindBy(css = "[type='submit']")
     public WebElement findButton;
 
     @FindBy (xpath = "//div[@id='filtered_transactions_for_account']/table/tbody/tr/td[1]")
     public List<WebElement>transactionDates;
 
+    @FindBy(xpath = "//div[@id='filtered_transactions_for_account']/table/tbody/tr/td[2]")
+    public List<WebElement>descriptionsColumn;
 
-    public void findTransactions(String fromDate, String toDate) {
+    @FindBy (xpath = "//div[@id='filtered_transactions_for_account']//th[contains(text(),'Date')]")
+    public WebElement datesHeader;
+
+
+    public void getTransactions(String fromDate, String toDate) {
         dateFrom.sendKeys(fromDate);
         dateTo.sendKeys(toDate);
         findButton.click();
