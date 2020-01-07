@@ -11,12 +11,15 @@ import io.cucumber.java.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class Hooks {
 
     @Before
     public void setup(){
         Driver.get().manage().window().maximize();
+        Driver.get().manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS);
         String url= ConfigurationReader.get("url");
         Driver.get().get(url);
         HomePage homePage= new HomePage();

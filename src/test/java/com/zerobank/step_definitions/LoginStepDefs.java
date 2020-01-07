@@ -22,6 +22,7 @@ public class LoginStepDefs {
     @When("the user enters valid login credentials")
     public void the_user_enters_valid_login_credentials() {
         LoginPage loginPage = new LoginPage();
+        BrowserUtils.waitForVisibility(loginPage.usernameBox,5);
         loginPage.login(ConfigurationReader.get("username"), ConfigurationReader.get("password"));
     }
 
