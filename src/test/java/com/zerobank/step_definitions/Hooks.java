@@ -19,7 +19,7 @@ public class Hooks {
     @Before
     public void setup(){
         Driver.get().manage().window().maximize();
-        Driver.get().manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS);
+        Driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         String url= ConfigurationReader.get("url");
         Driver.get().get(url);
         HomePage homePage= new HomePage();
