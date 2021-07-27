@@ -7,5 +7,6 @@ public class FirstChange {
     String c = "Elena";
     String onur = "Onurcan";
     String emir = "Emir";
+    String f = "Coach";
 
 }
